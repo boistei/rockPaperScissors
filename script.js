@@ -1,50 +1,55 @@
-let selection = ["Rock","Paper","Scissors"];
-let compScore = 0, playScore = 0;
+let compScore = 0, playScore = 0, gameOver = false;
+let play = "", comp = "";
 
-function select() {
-    return Math.floor(Math.random()*3);
+const buttons = document.querySelectorAll("button");
+for (let button of buttons) {
+    if (!gameOver) {
+        button.addEventListener("click", () => {
+            play = button.id;
+            comp = select();
+            game();
+            if (playScore === 5 || compScore === 5) {
+                gameOver = true;
+            }
+        });
+    }
 }
 
-function playRound (playerSelection, computerSelection)
-{
-    playerSelection = playerSelection.toLowerCase();
-    computerSelection = computerSelection.toLowerCase();
+
+function select() {
+    let selection = ["rock", "paper", "scissors"];
+    let rando = Math.floor(Math.random() * 3);
+    return selection[rando];
+}
+
+function playRound(playerSelection, computerSelection) {
     if ((computerSelection === "rock" && playerSelection === "scissors")
-    ||(computerSelection === "paper" && playerSelection === "rock")
-    ||(computerSelection === "scissors" && playerSelection === "paper"))
-    {
+        || (computerSelection === "paper" && playerSelection === "rock")
+        || (computerSelection === "scissors" && playerSelection === "paper")) {
         return "Computer";
     }
     else if ((computerSelection === "scissors" && playerSelection === "rock")
-    ||(computerSelection === "rock" && playerSelection === "paper")
-    ||(computerSelection === "paper" && playerSelection === "scissors"))
-    {
+        || (computerSelection === "rock" && playerSelection === "paper")
+        || (computerSelection === "paper" && playerSelection === "scissors")) {
         return "Player";
     }
-    else if (computerSelection === playerSelection)
-    {
+    else if (computerSelection === playerSelection) {
         return "Tie";
     }
     else return "Invalid!";
 }
 
-function game () {
-    while(compScore < 5 && playScore < 5) {
-    let comp = selection[select()];
-    let play = prompt("Enter Rock/Paper/Scissors", "Rock");
-    let winner = playRound(play,comp);
-        if (winner === "Computer") {
-            compScore++;
-            console.log(`${comp} beats ${play}. Computer wins this round. Computer: ${compScore}; Player: ${playScore}`);
-        } else if (winner === "Player") {
-            playScore++;
-            console.log(`${play} beats ${comp}. Player wins this round. Computer: ${compScore}; Player: ${playScore}`);
-        } else if (winner === "Tie") {
-            console.log(`It's a tie! Computer: ${compScore}; Player: ${playScore}`);
-        } else {
-            console.log("Invalid selection. Try again!");
-        }
-    }    
+function game() {
+    let winner = playRound(play, comp);
+    if (winner === "Computer") {
+        compScore++;
+        console.log(`Computer wins this round as computer selected ${comp} and ${comp} beats ${play}. Computer: ${compScore}; Player: ${playScore}`);
+    } else if (winner === "Player") {
+        playScore++;
+        console.log(`Player wins this round as computer selected ${comp} and ${play} beats ${comp}. Computer: ${compScore}; Player: ${playScore}`);
+    } else if (winner === "Tie") {
+        console.log(`It's a tie! Computer: ${compScore}; Player: ${playScore}`);
+    } else {
+        console.log("Invalid selection. Try again!");
+    }
 }
-
-game();
