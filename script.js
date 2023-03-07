@@ -1,18 +1,19 @@
-let compScore = 0, playScore = 0, gameOver = false;
+let compScore = 0, playScore = 0, tieScore = 0;
 let play = "", comp = "";
+let textContent = "";
+const scoreBoard = document.querySelectorAll("ul")[1];
+
+const compScoreDisp = document.querySelector("#compScoreDisp");
+const playScoreDisp = document.querySelector("#playScoreDisp");
+const tieScoreDisp = document.querySelector("#tieScoreDisp");
 
 const buttons = document.querySelectorAll("button");
 for (let button of buttons) {
-    if (!gameOver) {
-        button.addEventListener("click", () => {
-            play = button.id;
-            comp = select();
-            game();
-            if (playScore === 5 || compScore === 5) {
-                gameOver = true;
-            }
-        });
-    }
+    button.addEventListener("click", () => {
+        play = button.id;
+        comp = select();
+        game();
+    });
 }
 
 
@@ -25,31 +26,32 @@ function select() {
 function playRound(playerSelection, computerSelection) {
     if ((computerSelection === "rock" && playerSelection === "scissors")
         || (computerSelection === "paper" && playerSelection === "rock")
-        || (computerSelection === "scissors" && playerSelection === "paper")) {
+        || (computerSelection === "scissors" && playerSelection === "paper"))
         return "Computer";
-    }
     else if ((computerSelection === "scissors" && playerSelection === "rock")
         || (computerSelection === "rock" && playerSelection === "paper")
-        || (computerSelection === "paper" && playerSelection === "scissors")) {
+        || (computerSelection === "paper" && playerSelection === "scissors"))
         return "Player";
-    }
-    else if (computerSelection === playerSelection) {
+    else if (computerSelection === playerSelection)
         return "Tie";
-    }
-    else return "Invalid!";
 }
 
 function game() {
     let winner = playRound(play, comp);
     if (winner === "Computer") {
         compScore++;
-        console.log(`Computer wins this round as computer selected ${comp} and ${comp} beats ${play}. Computer: ${compScore}; Player: ${playScore}`);
+        textContent = `Computer wins this round as computer selected ${comp} and ${comp} beats ${play}.`;
     } else if (winner === "Player") {
         playScore++;
-        console.log(`Player wins this round as computer selected ${comp} and ${play} beats ${comp}. Computer: ${compScore}; Player: ${playScore}`);
+        textContent = `Player wins this round as computer selected ${comp} and ${play} beats ${comp}.`;
     } else if (winner === "Tie") {
-        console.log(`It's a tie! Computer: ${compScore}; Player: ${playScore}`);
-    } else {
-        console.log("Invalid selection. Try again!");
+        tieScore++;
+        textContent = `It's a tie!`;
     }
+    let scoreUpdate = document.createElement("li");
+    scoreUpdate.textContent = textContent;
+    scoreBoard.append(scoreUpdate);
+    compScoreDisp.textContent = compScore;
+    playScoreDisp.textContent = playScore;
+    tieScoreDisp.textContent = tieScore;
 }
