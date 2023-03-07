@@ -7,24 +7,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors!</title>
     <script src="script.js" defer></script>
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
 </head>
 
-<body>
-    <div id="buttons">
-        <button id="rock">Rock</button>
-        <button id="paper">Paper</button>
-        <button id="scissors">Scissors</button>
+<body class="p-3 m-0 border-0 bd-example bd-example-row">
+    <h1>Rock Paper Scissors!</h1>
+    <div class="container text-center">
+        <div class="row">
+            <button class="col" id="rock">Rock</button>
+            <button class="col" id="paper">Paper</button>
+            <button class="col" id="scissors">Scissors</button>
+        </div>
     </div>
     <h2>Score</h2>
-    <ul>
-        <li>Computer: <span id="compScoreDisp">0</span></li>
-        <li>Player: <span id="playScoreDisp">0</span></li>
-        <li>Tie: <span id="tieScoreDisp">0</span></li>
-    </ul>
+    <div class="container px-4 text-center">
+        <div class="row gx-5">
+            <div class="col">
+                <div class="p-3">
+                    <span class="material-symbols-rounded">computer</span>
+                    <p id="compScoreDisp">0</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="p-3">
+                    <span class="material-symbols-rounded">person</span>
+                    <p id="playScoreDisp">0</p>
+                </div>
+            </div>
+        </div>
+
+        Tie: <span id="tieScoreDisp">0</span>
+    </div>
+    <!-- <button id="reset">Reset</button> -->
     <h2>Updates</h2>
     <ul id="scoreBoard">
         <li>Game starts!</li>
     </ul>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
